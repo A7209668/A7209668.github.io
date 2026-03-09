@@ -62,7 +62,8 @@ console.log("Hello World");
 - [ ] 📄 [範例10](#範例10)
 
 ## 📄範例1
-```C
+> 比數值
+```cpp
 // 範例1 比數值
 #include<iostream>
 using namespace std;
@@ -80,7 +81,8 @@ return 0;}
 ```
 
 ## 📄範例2
-```C
+> 平均數
+```cpp
 // 範例2 平均數
 #include<iostream>
 #include<iomanip>
@@ -96,7 +98,8 @@ return 0;}
 ```
 
 ## 📄範例3
-```C
+> 最小公倍數
+```cpp
 // 範例3 最小公倍數
 #include<iostream>
 using namespace std;
@@ -115,37 +118,44 @@ return 0;}
 ```
 
 ## 📄範例4
-```C
+> 未知
+```cpp
 // 範例4
 ```
 
 ## 📄範例5
-```C
+> 未知
+```cpp
 // 範例5
 ```
 
 ## 📄範例6
-```C
+> 未知
+```cpp
 // 範例6
 ```
 
 ## 📄範例7
-```C
+> 未知
+```cpp
 // 範例7
 ```
 
 ## 📄範例8
-```C
+> 未知
+```cpp
 // 範例8
 ```
 
 ## 📄範例9
-```C
+> 未知
+```cpp
 // 範例9
 ```
 
 ## 📄範例10
-```C
+> 未知
+```cpp
 // 範例10
 ```
 
