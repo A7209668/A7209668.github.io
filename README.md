@@ -60,16 +60,31 @@ console.log("Hello World");
 using namespace std;
 
 int main(){
-int number, max, min; //宣告三個數，分別為輸入值、最大值、最小值
-cin >> number; //輸入第一個值
-max = min = number; //將第一個值設定成最大值、最小值
-for(int i=0; i<4; i++){ //使用for迴圈輸入後續4個值
-cin >> number; //輸入值
-if(number > max)max = number; //若輸入值比目前最大值大，則將最大值換成輸入值
-if(number < min)min = number; //若輸入值比目前最小值小，則將最小值換成輸入值
-}cout << max << " " << min << endl; //輸出最大值與最小值
+int number, max, min; // 3整數，輸入值、最大值、最小值
+cin >> number; // 輸入第1值
+max = min = number; // 第1值為最大值、最小值
+for(int i=0; i<4; i++){ // for迴圈輸入4值
+cin >> number; // 輸入值
+if(number > max)max = number; // 輸入值大於最大值，最大值為輸入值
+if(number < min)min = number; // 輸入值小於最小值，最小值為輸入值
+}cout << max << " " << min << endl; // 輸出最大值與最小值
 return 0;}
 ```
 
+## 範例2
+```C
+// 範例2
+#include<iostream>
+#include<iomanip>
+using namespace std;
+
+int main(){
+int number, sum = 0; // 2整數，輸入值、總和
+for(int i=0; i<5; i++){ // for迴圈輸入5值
+cin >> number; // 每次輸入1值
+sum += number; // 每次加總輸入值
+}cout << fixed << setprecision(2) << sum/5.0 << endl; // 輸入5整數平均，2位小數
+return 0;}
+```
 
 </details>
