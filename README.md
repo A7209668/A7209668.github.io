@@ -2,13 +2,13 @@
 
 ## 🗄️目錄
 
-- [x] 🛠️ [範本](#範本)
-- [ ] 🛠️ [代碼](#代碼)
+- [x] 📋 [範本](#範本)
+- [ ] 💻 [代碼](#代碼)
 
 </details>
 
 ---
-<details open><summary>目錄</summary>
+<details open><summary>範本</summary>
 
 # 📋範本
 
@@ -29,7 +29,7 @@
 | 強調文字 | **重點** |
 
 ---
-## 範例
+## 📌範例
 ```javascript
 // 範例
 console.log("Hello World");
