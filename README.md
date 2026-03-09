@@ -5,10 +5,11 @@
 - [x] 🛠️ [範本](#範本)
 - [ ] 🛠️ [代碼](#代碼)
 
-
 </details>
 
 ---
+<details open><summary>目錄</summary>
+
 # 範本
 
 ---
@@ -40,11 +41,23 @@ console.log("Hello World");
 - [ ] 完成網頁首頁
 - [ ] 完成功能開發
 
+</details>
+
 ---
 <details open><summary>代碼</summary>
 
 # 代碼
-<h1>這是範例頁面</h1>
-<p>範本</p>
+
+## 目錄
+
+- [x] 🛠️ [代碼1](#代碼1)
+- [ ] 🛠️ [代碼2](#代碼2)
+
+## 代碼
+```C
+// 範例
+console.log("Hello World");
+```
+
 
 </details>
