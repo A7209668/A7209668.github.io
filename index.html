@@ -1,0 +1,302 @@
+<style>
+    body,
+    html {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(-45deg, #4CAF50, #2196F3, #FF5722, #9C27B0);
+        background-size: 400% 400%;
+        animation: 漸變背景動畫 15s ease infinite;
+        z-index: -2;
+        /* 放到最底層 */
+    }
+
+    @keyframes 漸變背景 {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    #連線圖 {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        /* 不影響滑鼠操作 */
+        z-index: -1;
+        /* 在內容下方，但在背景上 */
+    }
+
+    line {
+        stroke: white;
+        stroke-width: 0.5;
+        opacity: 0.8;
+    }
+
+    .粒子 {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: rgba(255, 255, 255, 0.5);
+        /* 半透明白色 */
+        border-radius: 50%;
+        opacity: 0.8;
+        will-change: transform;
+    }
+
+    #粒子容器 {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        /* 在內容下方，但在背景上 */
+    }
+
+    header {
+        background-color: rgba(76, 175, 80, 0.9);
+        color: white;
+        text-align: center;
+        padding: 2rem 1rem;
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        background-color: rgba(51, 51, 51, 0.9);
+    }
+
+    nav span {
+        color: white;
+        padding: 1rem;
+        cursor: pointer;
+    }
+
+    nav span:hover {
+        background-color: #575757;
+    }
+
+    main {
+        flex: 1;
+        padding: 2rem;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        background: transparent;
+        /* 透明，顯示粒子與漸變 */
+    }
+
+    section {
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    footer {
+        position: fixed;
+        /* 固定在頁面底部 */
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+        background-color: rgba(51, 51, 51, 0.9);
+        color: white;
+        z-index: 1;
+    }
+
+    a {
+        color: #666;
+        padding: 1rem;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #000;
+        background-color: #ccc;
+    }
+
+    .浮動按鈕 {
+        background-color: #FF4081;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        z-index: 1;
+    }
+
+    .浮動按鈕:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .標題 {
+        text-align: center;
+    }
+
+    .內容 {
+        text-align: center;
+    }
+</style>
+
+<title>個人主頁</title>
+
+<svg id="連線圖"></svg>
+<div id="粒子容器"></div>
+
+<header>
+    <h1>GitHub Page</h1>
+    <p>個人主頁 & 代碼倉庫</p>
+    <button id="切換特效" class="浮動按鈕">關閉特效</button>
+</header>
+
+<nav>
+    <span>專案</span>
+</nav>
+
+<main>
+    <section id="專案">
+        <h2 class="標題">專案</h2>
+        <div class="內容">
+            <a href="#" class="浮動按鈕">圖示對決</a>
+            <a href="#" class="浮動按鈕">汽車</a>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p id="現在時間"></p>
+</footer>
+
+
+<script>
+
+    let 特效開啟 = true;
+
+    const 切換按鈕 = document.getElementById("切換特效");
+    切換按鈕.addEventListener("click", () => {
+        特效開啟 = !特效開啟;
+        切換按鈕.innerText = 特效開啟 ? "關閉特效" : "開啟特效";
+
+        // 隱藏或顯示粒子與連線
+        document.getElementById("粒子容器").style.display = 特效開啟 ? "block" : "none";
+        document.getElementById("連線圖").style.display = 特效開啟 ? "block" : "none";
+    });
+
+    const 粒子數量 = 50;
+    const 最大連線距離 = 120; // 粒子連線最大距離
+    const 粒子列表 = [];
+
+    const svg = document.getElementById("連線圖");
+    const 粒子容器 = document.getElementById("粒子容器");
+
+    // 產生粒子元素
+    for (let i = 0; i < 粒子數量; i++) {
+        const div = document.createElement('div');
+        div.classList.add('粒子');
+        粒子容器.appendChild(div);
+
+        const 粒子 = {
+            元素: div,
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight,
+            dx: (Math.random() - 0.5) * 1.5,
+            dy: (Math.random() - 0.5) * 1.5,
+            規模: Math.random() * 4 + 2
+        };
+        div.style.width = div.style.height = 粒子.規模 + 'px';
+        div.style.left = 粒子.x + 'px';
+        div.style.top = 粒子.y + 'px';
+
+        粒子列表.push(粒子);
+    }
+
+    function 粒子動畫() {
+        if (特效開啟) {
+            const 時間 = Date.now() * 0.002; // 時間參數
+            粒子列表.forEach(p => {
+                p.x += p.dx;
+                p.y += p.dy;
+
+                // 邊界反彈
+                if (p.x < 0 || p.x > window.innerWidth - p.規模) p.dx *= -1;
+                if (p.y < 0 || p.y > window.innerHeight - p.規模) p.dy *= -1;
+
+                p.元素.style.transform = `translate(${p.x}px, ${p.y}px)`;
+                p.元素.style.background = `hsl(${(p.x + 時間 * 60) % 360}, 100%, 70%, 0.8)`;
+            });
+
+            // 更新連線
+            svg.innerHTML = ""; // 清空之前的線條
+            for (let i = 0; i < 粒子數量; i++) {
+                for (let j = i + 1; j < 粒子數量; j++) {
+                    const a = 粒子列表[i];
+                    const b = 粒子列表[j];
+                    const dx = a.x - b.x;
+                    const dy = a.y - b.y;
+                    const 距離 = Math.sqrt(dx * dx + dy * dy);
+                    if (距離 < 最大連線距離) {
+                        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                        line.setAttribute("x1", a.x + a.規模 / 2);
+                        line.setAttribute("y1", a.y + a.規模 / 2);
+                        line.setAttribute("x2", b.x + b.規模 / 2);
+                        line.setAttribute("y2", b.y + b.規模 / 2);
+                        line.style.opacity = 1 - 距離 / 最大連線距離; // 距離越遠越淡
+                        line.style.stroke = `hsl(${(a.x + 時間 * 60) % 360}, 100%, 70%, 0.8)`;
+                        svg.appendChild(line);
+                    }
+                }
+            }
+        }
+
+        requestAnimationFrame(粒子動畫);
+    }
+
+    粒子動畫();
+
+    // 調整畫面
+    window.addEventListener('resize', () => {
+        粒子列表.forEach(p => {
+            p.x = Math.min(p.x, window.innerWidth - p.規模);
+            p.y = Math.min(p.y, window.innerHeight - p.規模);
+        });
+    });
+
+    function 更新時間() {
+        const now = new Date();
+        document.getElementById("現在時間").innerText = now.toLocaleString();
+    }
+    setInterval(更新時間, 1000);
+    更新時間();
+
+</script>

@@ -1,6 +1,8 @@
-<details open><summary>目錄</summary>
+---
 
 ## 🗄️目錄
+
+<details open><summary>目錄</summary>
 
 - [x] 📋 [範本](#範本)
 - [ ] 💻 [代碼](#代碼)
@@ -8,16 +10,19 @@
 </details>
 
 ---
-<details open><summary>範本</summary>
 
 # 📋範本
 
+<details open><summary>範本</summary>
+  
 ---
+
 ## 📄簡介
 這是 README 範本，包含[標題](#網頁)、[副標題](#簡介)、[表格](#功能)、[範例](#範例)以及[進度](#進度)，用來快速建立 GitHub 頁面。
 > 這是註解
 
 ---
+
 ## 🛠️功能
 | 功能 | 說明 |
 | ---- | ---- |
@@ -29,6 +34,7 @@
 | 強調文字 | **重點** |
 
 ---
+
 ## 📌範例
 ```javascript
 // 範例
@@ -36,6 +42,7 @@ console.log("Hello World");
 ```
 
 ---
+
 ## ⌛進度
 - [x] 完成 README
 - [ ] 完成網頁首頁
@@ -44,9 +51,12 @@ console.log("Hello World");
 </details>
 
 ---
-<details open><summary>代碼</summary>
 
 # 💻代碼
+
+<details open><summary>代碼</summary>
+
+---
 
 ## 🗄️目錄
 
@@ -60,6 +70,8 @@ console.log("Hello World");
 - [ ] 📄 [範例8](#範例8)
 - [ ] 📄 [範例9](#範例9)
 - [ ] 📄 [範例10](#範例10)
+
+---
 
 ## 📄範例1
 > 比數值
